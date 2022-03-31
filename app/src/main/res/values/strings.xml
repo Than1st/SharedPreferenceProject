@@ -8,6 +8,7 @@
     <string name="clear_text">Clear</string>
     <string name="username_titik_dua_text">Username :</string>
     <string name="password_titik_dua_text">Password :</string>
-    <string name="error_username">"Username Tidak Boleh Kosong!"</string>
-    <string name="error_password">"Password Tidak Boleh Kosong!"</string>
+    <string name="error_username">Username Tidak Boleh Kosong!</string>
+    <string name="error_password">Password Tidak Boleh Kosong!</string>
+    <string name="logout_text">Logout</string>
 </resources>

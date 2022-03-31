@@ -1,6 +1,7 @@
 package com.than.sharedpreferenceproject
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,9 +16,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val sharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-
+        goHomeScreen()
         // save
-        binding.btnSave.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.text.toString()
             val password = binding.etPassword.text.toString()
             when {
@@ -32,34 +33,35 @@ class MainActivity : AppCompatActivity() {
                     editor.putString("username", username)
                     editor.putString("password", password)
                     editor.apply()
-                    Toast.makeText(this, "Data Saved", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, HomePageActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }
 
         // view
-        binding.btnView.setOnClickListener {
-            val sharedUsername = sharedPreferences.getString("username", "defaultUsername")
-            val sharedPassword = sharedPreferences.getString("password", "defaultPassword")
-            if (sharedUsername.equals("defaultUsername") && sharedPassword.equals("defaultPassword")){
-                binding.tvUsername.setText("Default Username $sharedUsername").toString()
-                binding.tvPassword.setText("Default Password $sharedPassword").toString()
-                Toast.makeText(this, "Data Kosong!", Toast.LENGTH_SHORT).show()
-            } else {
-                binding.tvUsername.text = sharedUsername.toString()
-                binding.tvPassword.text = sharedPassword.toString()
-                Toast.makeText(this, "Data Tampil!", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        binding.btnView.setOnClickListener {
+//            val sharedUsername = sharedPreferences.getString("username", "defaultUsername")
+//            val sharedPassword = sharedPreferences.getString("password", "defaultPassword")
+//            if (sharedUsername.equals("defaultUsername") && sharedPassword.equals("defaultPassword")){
+//                binding.tvUsername.setText("Default Username $sharedUsername").toString()
+//                binding.tvPassword.setText("Default Password $sharedPassword").toString()
+//                Toast.makeText(this, "Data Kosong!", Toast.LENGTH_SHORT).show()
+//            } else {
+//                binding.tvUsername.text = sharedUsername.toString()
+//                binding.tvPassword.text = sharedPassword.toString()
+//                Toast.makeText(this, "Data Tampil!", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+    }
 
-        // clear
-        binding.btnClear.setOnClickListener {
-            val editor = sharedPreferences.edit()
-            editor.clear()
-            editor.apply()
-            binding.etUsername.setText("")
-            binding.etPassword.setText("")
-            Toast.makeText(this, "Data Dihapus!", Toast.LENGTH_SHORT).show()
+    private fun goHomeScreen() {
+        val sharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
+        val sharedUsername = sharedPreferences.getString("username", "defaultUsername")
+        val sharedPassword = sharedPreferences.getString("password", "defaultPassword")
+        if (!sharedUsername.equals("defaultUsername") && !sharedPassword.equals("defaultPassword")){
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 }
