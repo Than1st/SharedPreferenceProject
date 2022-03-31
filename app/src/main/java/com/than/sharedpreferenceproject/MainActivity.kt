@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val sharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        goHomeScreen()
         // save
         binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.text.toString()
@@ -55,13 +54,5 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
-    private fun goHomeScreen() {
-        val sharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val sharedUsername = sharedPreferences.getString("username", "defaultUsername")
-        val sharedPassword = sharedPreferences.getString("password", "defaultPassword")
-        if (!sharedUsername.equals("defaultUsername") && !sharedPassword.equals("defaultPassword")){
-            val intent = Intent(this, HomePageActivity::class.java)
-            startActivity(intent)
-        }
-    }
+
 }

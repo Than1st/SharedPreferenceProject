@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.than.sharedpreferenceproject.databinding.ActivityHomePageBinding
 
 class HomePageActivity : AppCompatActivity() {
-    lateinit var binding : ActivityHomePageBinding
+    private lateinit var binding : ActivityHomePageBinding
     private val sharedPrefFile = "kotlinsharedpreference"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +21,7 @@ class HomePageActivity : AppCompatActivity() {
             val editor = sharedPreferences.edit()
             editor.clear()
             editor.apply()
+            finish()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
